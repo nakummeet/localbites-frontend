@@ -1,0 +1,12 @@
+/* ─── App-level Layout ───────────────────────────────── */
+/* Replaces the Vite boilerplate with the actual app layout. */
+
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.app__content {
+  flex: 1;
+}

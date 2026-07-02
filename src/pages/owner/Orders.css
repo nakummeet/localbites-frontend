@@ -1,0 +1,133 @@
+/* ─── Owner Orders Page ──────────────────────────────── */
+
+.owner-orders-page__title {
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-bold);
+  margin-bottom: var(--space-xl);
+}
+
+.owner-orders-page__list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+/* ─── Owner Order Card ───────────────────────────────── */
+.owner-order-card {
+  background-color: var(--color-white);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  box-shadow: var(--shadow-xs);
+  border: 1px solid var(--color-border-light);
+}
+
+.owner-order-card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-md);
+}
+
+.owner-order-card__meta {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.owner-order-card__id {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-bold);
+  font-family: monospace;
+}
+
+.owner-order-card__date {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+}
+
+.owner-order-card__status {
+  padding: 4px 14px;
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+}
+
+.owner-order-card__customer {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-md);
+}
+
+/* ─── Items ──────────────────────────────────────────── */
+.owner-order-card__items {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  padding: var(--space-md) 0;
+  border-top: 1px solid var(--color-border-light);
+}
+
+.owner-order-card__item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: var(--font-size-sm);
+  color: var(--color-text);
+}
+
+.owner-order-card__item-qty {
+  color: var(--color-text-muted);
+  font-weight: var(--font-weight-medium);
+}
+
+/* ─── Footer ─────────────────────────────────────────── */
+.owner-order-card__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: var(--space-md);
+  border-top: 1px solid var(--color-border-light);
+  margin-top: var(--space-sm);
+  gap: var(--space-md);
+}
+
+.owner-order-card__total {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-primary);
+}
+
+.owner-order-card__status-control {
+  flex-shrink: 0;
+}
+
+.owner-order-card__select {
+  padding: 8px 14px;
+  font-size: var(--font-size-sm);
+  font-family: var(--font-family);
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background-color: var(--color-white);
+  color: var(--color-text);
+  cursor: pointer;
+  transition: border-color var(--transition-fast);
+  appearance: auto;
+}
+
+.owner-order-card__select:focus {
+  border-color: var(--color-primary);
+  outline: none;
+  box-shadow: 0 0 0 3px var(--color-primary-light);
+}
+
+.owner-order-card__select:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+@media (max-width: 768px) {
+  .owner-order-card__footer {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

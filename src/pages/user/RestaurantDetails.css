@@ -1,0 +1,180 @@
+/* ─── Restaurant Details Page ────────────────────────── */
+
+.restaurant-details {
+  padding-bottom: var(--space-3xl);
+}
+
+/* ─── Header ─────────────────────────────────────────── */
+.restaurant-details__header {
+  margin-bottom: var(--space-2xl);
+}
+
+.restaurant-details__image-wrapper {
+  width: 100%;
+  height: 280px;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  margin-bottom: var(--space-lg);
+}
+
+.restaurant-details__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.restaurant-details__info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.restaurant-details__name {
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-bold);
+}
+
+.restaurant-details__cuisine {
+  display: inline-block;
+  padding: 4px 16px;
+  background-color: var(--color-primary-light);
+  color: var(--color-primary);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  border-radius: var(--radius-full);
+  width: fit-content;
+}
+
+.restaurant-details__address,
+.restaurant-details__phone {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+/* ─── Menu Section ───────────────────────────────────── */
+.restaurant-details__menu {
+  margin-top: var(--space-xl);
+}
+
+.restaurant-details__menu-title {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  margin-bottom: var(--space-lg);
+}
+
+/* ─── Food Grid ──────────────────────────────────────── */
+.food-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: var(--space-lg);
+}
+
+/* ─── Food Card ──────────────────────────────────────── */
+.food-card {
+  background-color: var(--color-white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  border: 1px solid var(--color-border-light);
+  transition: all var(--transition-base);
+}
+
+.food-card:hover {
+  box-shadow: var(--shadow-md);
+}
+
+.food-card--unavailable {
+  opacity: 0.6;
+}
+
+.food-card__image-wrapper {
+  height: 160px;
+  overflow: hidden;
+  position: relative;
+}
+
+.food-card__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--transition-slow);
+}
+
+.food-card:hover .food-card__image {
+  transform: scale(1.05);
+}
+
+.food-card__unavailable-badge {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  padding: 4px 10px;
+  background-color: var(--color-secondary);
+  color: var(--color-white);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  border-radius: var(--radius-full);
+}
+
+.food-card__body {
+  padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.food-card__name {
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text);
+}
+
+.food-card__description {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-normal);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.food-card__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: var(--space-sm);
+}
+
+.food-card__price {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-primary);
+}
+
+/* ─── Unavailable Section ────────────────────────────── */
+.restaurant-details__unavailable {
+  margin-top: var(--space-2xl);
+}
+
+.restaurant-details__unavailable-title {
+  font-size: var(--font-size-lg);
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-md);
+}
+
+/* ─── Responsive ─────────────────────────────────────── */
+@media (max-width: 768px) {
+  .restaurant-details__image-wrapper {
+    height: 200px;
+    border-radius: var(--radius-lg);
+  }
+
+  .restaurant-details__name {
+    font-size: var(--font-size-2xl);
+  }
+
+  .food-grid {
+    grid-template-columns: 1fr;
+  }
+}

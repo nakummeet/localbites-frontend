@@ -1,0 +1,69 @@
+/* ─── Loader Component ───────────────────────────────── */
+
+.loader-overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(4px);
+  z-index: var(--z-modal);
+}
+
+.loader-inline {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-2xl) 0;
+}
+
+.loader {
+  position: relative;
+  display: inline-block;
+}
+
+/* ─── Sizes ──────────────────────────────────────────── */
+.loader--sm {
+  width: 24px;
+  height: 24px;
+}
+
+.loader--md {
+  width: 40px;
+  height: 40px;
+}
+
+.loader--lg {
+  width: 56px;
+  height: 56px;
+}
+
+/* ─── Ring Animation ─────────────────────────────────── */
+.loader__ring {
+  position: absolute;
+  inset: 0;
+  border: 3px solid transparent;
+  border-radius: 50%;
+}
+
+.loader__ring:nth-child(1) {
+  border-top-color: var(--color-primary);
+  animation: loader-spin 1s ease-in-out infinite;
+}
+
+.loader__ring:nth-child(2) {
+  border-right-color: var(--color-primary-light);
+  animation: loader-spin 1.2s ease-in-out infinite reverse;
+}
+
+.loader__ring:nth-child(3) {
+  border-bottom-color: var(--color-primary);
+  animation: loader-spin 1.5s ease-in-out infinite;
+  opacity: 0.4;
+}
+
+@keyframes loader-spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

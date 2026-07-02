@@ -1,0 +1,115 @@
+/* ─── Owner Foods Page ───────────────────────────────── */
+
+.foods-page__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-xl);
+  flex-wrap: wrap;
+  gap: var(--space-md);
+}
+
+.foods-page__title {
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-bold);
+}
+
+/* ─── Food Grid ──────────────────────────────────────── */
+.foods-page__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: var(--space-md);
+}
+
+/* ─── Food Manage Card ───────────────────────────────── */
+.food-manage-card {
+  background-color: var(--color-white);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-xs);
+  border: 1px solid var(--color-border-light);
+  transition: box-shadow var(--transition-base);
+}
+
+.food-manage-card:hover {
+  box-shadow: var(--shadow-md);
+}
+
+.food-manage-card--unavailable {
+  opacity: 0.65;
+}
+
+.food-manage-card__image-wrapper {
+  height: 140px;
+  overflow: hidden;
+  position: relative;
+}
+
+.food-manage-card__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.food-manage-card__badge {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+}
+
+.food-manage-card__badge--on {
+  background-color: var(--color-success-light);
+  color: var(--color-success);
+}
+
+.food-manage-card__badge--off {
+  background-color: var(--color-danger-light);
+  color: var(--color-danger);
+}
+
+.food-manage-card__body {
+  padding: var(--space-md);
+}
+
+.food-manage-card__name {
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+  margin-bottom: 4px;
+}
+
+.food-manage-card__price {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-primary);
+  margin-bottom: var(--space-md);
+}
+
+.food-manage-card__actions {
+  display: flex;
+  gap: var(--space-xs);
+  flex-wrap: wrap;
+}
+
+/* ─── Modal Form ─────────────────────────────────────── */
+.foods-page__form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.foods-page__modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--space-sm);
+  margin-top: var(--space-sm);
+}
+
+@media (max-width: 768px) {
+  .foods-page__grid {
+    grid-template-columns: 1fr;
+  }
+}

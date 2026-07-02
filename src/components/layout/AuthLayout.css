@@ -1,0 +1,61 @@
+/* ─── Auth Layout ────────────────────────────────────── */
+
+.auth-layout {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #fff5f0 0%, #fef0e6 50%, #f8f9fa 100%);
+  padding: var(--space-lg);
+}
+
+.auth-layout__container {
+  width: 100%;
+  max-width: 440px;
+}
+
+/* ─── Brand ──────────────────────────────────────────── */
+.auth-layout__brand {
+  text-align: center;
+  margin-bottom: var(--space-xl);
+}
+
+.auth-layout__icon {
+  font-size: 3rem;
+  display: block;
+  margin-bottom: var(--space-sm);
+}
+
+.auth-layout__title {
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-extrabold);
+  color: var(--color-primary);
+  margin-bottom: var(--space-xs);
+  letter-spacing: -0.5px;
+}
+
+.auth-layout__tagline {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+/* ─── Card ───────────────────────────────────────────── */
+.auth-layout__card {
+  background-color: var(--color-white);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-lg);
+  padding: var(--space-xl);
+  border: 1px solid var(--color-border-light);
+}
+
+@media (max-width: 480px) {
+  .auth-layout {
+    padding: var(--space-md);
+    align-items: flex-start;
+    padding-top: var(--space-3xl);
+  }
+
+  .auth-layout__card {
+    padding: var(--space-lg);
+  }
+}
