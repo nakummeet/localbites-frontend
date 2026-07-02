@@ -71,30 +71,100 @@ A modern food ordering web application built with **React** and **Vite**. LocalB
 # 📂 Project Structure
 
 ```
-src/
-│
-├── assets/
-├── components/
-│   ├── common/
-│   ├── layout/
-│
-├── context/
-│
-├── hooks/
-│
-├── pages/
-│   ├── auth/
-│   ├── user/
-│   ├── owner/
-│
-├── routes/
-│
-├── services/
-│
-├── utils/
-│
-├── App.jsx
-└── main.jsx
+localbites-frontend/
+├── public/
+├── src/
+│   ├── assets/
+│   │   └── logo/
+│   ├── components/
+│   │   ├── common/
+│   │   │   ├── Button.css
+│   │   │   ├── Button.jsx
+│   │   │   ├── ConfirmDialog.css
+│   │   │   ├── ConfirmDialog.jsx
+│   │   │   ├── EmptyState.css
+│   │   │   ├── EmptyState.jsx
+│   │   │   ├── Input.css
+│   │   │   ├── Input.jsx
+│   │   │   ├── Loader.css
+│   │   │   ├── Loader.jsx
+│   │   │   ├── Modal.css
+│   │   │   └── Modal.jsx
+│   │   └── layout/
+│   │       ├── AuthLayout.css
+│   │       ├── AuthLayout.jsx
+│   │       ├── Footer.css
+│   │       ├── Footer.jsx
+│   │       ├── Navbar.css
+│   │       ├── Navbar.jsx
+│   │       ├── OwnerLayout.css
+│   │       ├── OwnerLayout.jsx
+│   │       ├── Sidebar.css
+│   │       ├── Sidebar.jsx
+│   │       └── UserLayout.jsx
+│   ├── context/
+│   │   ├── AuthContext.jsx
+│   │   └── CartContext.jsx
+│   ├── hooks/
+│   │   ├── useAuth.js
+│   │   └── useCart.js
+│   ├── pages/
+│   │   ├── auth/
+│   │   │   ├── Login.css
+│   │   │   ├── Login.jsx
+│   │   │   ├── Signup.css
+│   │   │   └── Signup.jsx
+│   │   ├── owner/
+│   │   │   ├── Dashboard.css
+│   │   │   ├── Dashboard.jsx
+│   │   │   ├── Foods.css
+│   │   │   ├── Foods.jsx
+│   │   │   ├── Orders.css
+│   │   │   ├── Orders.jsx
+│   │   │   ├── Profile.css
+│   │   │   ├── Profile.jsx
+│   │   │   ├── Restaurant.css
+│   │   │   └── Restaurant.jsx
+│   │   └── user/
+│   │       ├── Cart.css
+│   │       ├── Cart.jsx
+│   │       ├── Home.css
+│   │       ├── Home.jsx
+│   │       ├── Orders.css
+│   │       ├── Orders.jsx
+│   │       ├── Profile.css
+│   │       ├── Profile.jsx
+│   │       ├── RestaurantDetails.css
+│   │       └── RestaurantDetails.jsx
+│   ├── routes/
+│   │   ├── AppRoutes.jsx
+│   │   ├── OwnerRoute.jsx
+│   │   └── ProtectedRoute.jsx
+│   ├── services/
+│   │   ├── api.js
+│   │   ├── authService.js
+│   │   ├── cartService.js
+│   │   ├── foodService.js
+│   │   ├── orderService.js
+│   │   ├── restaurantService.js
+│   │   └── userService.js
+│   ├── utils/
+│   │   ├── constants.js
+│   │   ├── helpers.js
+│   │   └── storage.js
+│   ├── App.css
+│   ├── App.jsx
+│   ├── index.css
+│   └── main.jsx
+├── .gitignore
+├── aicodebridge.md
+├── backendcode.md
+├── eslint.config.js
+├── index.html
+├── package-lock.json
+├── package.json
+├── README.md
+└── vite.config.js
 ```
 
 ---

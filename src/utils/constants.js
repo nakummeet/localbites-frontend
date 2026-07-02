@@ -4,7 +4,8 @@
  */
 
 // Backend base URL — change this when deploying
-export const API_BASE_URL = 'https://localbites-backend.vercel.app/api';
+export const API_BASE_URL =
+  import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 
 // User roles — must match backend enum values exactly
 export const ROLES = {
