@@ -23,12 +23,12 @@ import './RestaurantDetails.css';
 const RestaurantDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { addToCart, cartItems } = useCart();
+  const { addToCart, updateQuantity, removeItem, cartItems } = useCart();
 
   const [restaurant, setRestaurant] = useState(null);
   const [foods, setFoods] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [addingToCart, setAddingToCart] = useState(null); // tracks which food is being added
+  const [updatingItem, setUpdatingItem] = useState(null); // tracks which food is being updated
 
   useEffect(() => {
     const fetchData = async () => {
@@ -50,17 +50,39 @@ const RestaurantDetails = () => {
     fetchData();
   }, [id, navigate]);
 
-  const getCartQuantity = (foodId) => {
-    const cartItem = cartItems.find(
-      (item) => item.food?._id === foodId || item._id === foodId
+  const getCartItem = (foodId) => {
+    return cartItems.find(
+      (item) => item.food?._id === foodId || item.food === foodId || item._id === foodId
     );
-    return cartItem?.quantity || 0;
+  };
+
+  const getCartQuantity = (foodId) => {
+    const item = getCartItem(foodId);
+    return item ? (item.quantity || 1) : 0;
   };
 
   const handleAddToCart = async (food) => {
-    setAddingToCart(food._id);
+    setUpdatingItem(food._id);
     await addToCart(food._id, id, 1);
-    setAddingToCart(null);
+    setUpdatingItem(null);
+  };
+
+  const handleIncrease = async (food) => {
+    const currentQty = getCartQuantity(food._id);
+    setUpdatingItem(food._id);
+    await updateQuantity(food._id, currentQty + 1);
+    setUpdatingItem(null);
+  };
+
+  const handleDecrease = async (food) => {
+    const currentQty = getCartQuantity(food._id);
+    setUpdatingItem(food._id);
+    if (currentQty <= 1) {
+      await removeItem(food._id);
+    } else {
+      await updateQuantity(food._id, currentQty - 1);
+    }
+    setUpdatingItem(null);
   };
 
   if (loading) return <Loader fullScreen />;
@@ -109,37 +131,67 @@ const RestaurantDetails = () => {
             <>
               {availableFoods.length > 0 && (
                 <div className="food-grid">
-                  {availableFoods.map((food) => (
-                    <div key={food._id} className="food-card">
-                      <div className="food-card__image-wrapper">
-                        <img
-                          src={food.image || `https://placehold.co/300x200/ff6b35/white?text=${encodeURIComponent(food.name)}`}
-                          alt={food.name}
-                          className="food-card__image"
-                          loading="lazy"
-                        />
-                      </div>
-                      <div className="food-card__body">
-                        <h3 className="food-card__name">{food.name}</h3>
-                        {food.description && (
-                          <p className="food-card__description">{food.description}</p>
-                        )}
-                        <div className="food-card__footer">
-                          <span className="food-card__price">
-                            {formatCurrency(food.price)}
-                          </span>
-                          <Button
-                            variant="primary"
-                            size="sm"
-                            loading={addingToCart === food._id}
-                            onClick={() => handleAddToCart(food)}
-                          >
-                            {`Add${getCartQuantity(food._id) > 0 ? ` (${getCartQuantity(food._id)})` : ''}`}
-                          </Button>
+                  {availableFoods.map((food) => {
+                    const quantity = getCartQuantity(food._id);
+                    const isProcessing = updatingItem === food._id;
+                    return (
+                      <div key={food._id} className="food-card">
+                        <div className="food-card__image-wrapper">
+                          <img
+                            src={food.image || `https://placehold.co/300x200/ff6b35/white?text=${encodeURIComponent(food.name)}`}
+                            alt={food.name}
+                            className="food-card__image"
+                            loading="lazy"
+                          />
+                        </div>
+                        <div className="food-card__body">
+                          <h3 className="food-card__name">{food.name}</h3>
+                          {food.description && (
+                            <p className="food-card__description">{food.description}</p>
+                          )}
+                          <div className="food-card__footer">
+                            <span className="food-card__price">
+                              {formatCurrency(food.price)}
+                            </span>
+                            {quantity > 0 ? (
+                              <div className="food-card__qty-control">
+                                <button
+                                  type="button"
+                                  className="food-card__qty-btn"
+                                  disabled={isProcessing}
+                                  onClick={() => handleDecrease(food)}
+                                  aria-label="Decrease quantity"
+                                >
+                                  −
+                                </button>
+                                <span className="food-card__qty-count">
+                                  {isProcessing ? '...' : quantity}
+                                </span>
+                                <button
+                                  type="button"
+                                  className="food-card__qty-btn"
+                                  disabled={isProcessing}
+                                  onClick={() => handleIncrease(food)}
+                                  aria-label="Increase quantity"
+                                >
+                                  +
+                                </button>
+                              </div>
+                            ) : (
+                              <Button
+                                variant="primary"
+                                size="sm"
+                                loading={isProcessing}
+                                onClick={() => handleAddToCart(food)}
+                              >
+                                ADD +
+                              </Button>
+                            )}
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  ))}
+                    );
+                  })}
                 </div>
               )}
 

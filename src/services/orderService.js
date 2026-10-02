@@ -28,10 +28,29 @@ export const getRestaurantOrders = async () => {
 };
 
 /**
- * Update order status
+ * Accept order (Owner)
+ * PUT /api/orders/:id/accept
+ */
+export const acceptOrder = async (orderId) => {
+  const response = await api.put(`/orders/${orderId}/accept`);
+  return response.data.data;
+};
+
+/**
+ * Reject order (Owner)
+ * PUT /api/orders/:id/reject
+ */
+export const rejectOrder = async (orderId) => {
+  const response = await api.put(`/orders/${orderId}/reject`);
+  return response.data.data;
+};
+
+/**
+ * Update order status (Owner: accepted -> preparing -> delivered)
  * PUT /api/orders/:id/status
  */
-export const updateOrderStatus = async (orderId, data) => {
-  const response = await api.put(`/orders/${orderId}/status`, data);
+export const updateOrderStatus = async (orderId, statusData) => {
+  const payload = typeof statusData === 'string' ? { status: statusData } : statusData;
+  const response = await api.put(`/orders/${orderId}/status`, payload);
   return response.data.data;
 };

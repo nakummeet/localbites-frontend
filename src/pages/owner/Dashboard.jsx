@@ -13,7 +13,7 @@ import * as orderService from '../../services/orderService';
 import * as restaurantService from '../../services/restaurantService';
 import Loader from '../../components/common/Loader';
 import EmptyState from '../../components/common/EmptyState';
-import { formatCurrency, formatDate, getErrorMessage } from '../../utils/helpers';
+import { formatCurrency, formatDate, formatStatus, getErrorMessage } from '../../utils/helpers';
 import { STATUS_COLORS, ORDER_STATUS } from '../../utils/constants';
 import toast from 'react-hot-toast';
 import './Dashboard.css';
@@ -52,9 +52,15 @@ const Dashboard = () => {
 
   // Compute stats
   const totalOrders = orders.length;
-  const pendingOrders = orders.filter((o) => o.status === ORDER_STATUS.PENDING).length;
+  const pendingOrders = orders.filter(
+    (o) => (o.status || '').toLowerCase() === ORDER_STATUS.PENDING
+  ).length;
   const totalRevenue = orders
-    .filter((o) => o.status === ORDER_STATUS.DELIVERED)
+    .filter(
+      (o) =>
+        (o.status || '').toLowerCase() !== ORDER_STATUS.REJECTED &&
+        (o.status || '').toLowerCase() !== ORDER_STATUS.CANCELLED
+    )
     .reduce((sum, o) => sum + (o.totalAmount || o.total || 0), 0);
   const recentOrders = orders.slice(0, 5);
 
@@ -125,30 +131,33 @@ const Dashboard = () => {
               <p className="dashboard-page__empty">No orders yet</p>
             ) : (
               <div className="dashboard-page__order-list">
-                {recentOrders.map((order) => (
-                  <div key={order._id} className="dashboard-order">
-                    <div className="dashboard-order__info">
-                      <span className="dashboard-order__id">
-                        #{order._id?.slice(-6).toUpperCase()}
+                {recentOrders.map((order) => {
+                  const statusKey = (order.status || '').toLowerCase();
+                  return (
+                    <div key={order._id} className="dashboard-order">
+                      <div className="dashboard-order__info">
+                        <span className="dashboard-order__id">
+                          #{order._id?.slice(-6).toUpperCase()}
+                        </span>
+                        <span className="dashboard-order__date">
+                          {formatDate(order.createdAt || order.date)}
+                        </span>
+                      </div>
+                      <span
+                        className="dashboard-order__status"
+                        style={{
+                          backgroundColor: `${STATUS_COLORS[statusKey] || '#6b7280'}15`,
+                          color: STATUS_COLORS[statusKey] || '#6b7280',
+                        }}
+                      >
+                        {formatStatus(order.status)}
                       </span>
-                      <span className="dashboard-order__date">
-                        {formatDate(order.createdAt || order.date)}
+                      <span className="dashboard-order__total">
+                        {formatCurrency(order.totalAmount || order.total || 0)}
                       </span>
                     </div>
-                    <span
-                      className="dashboard-order__status"
-                      style={{
-                        backgroundColor: `${STATUS_COLORS[order.status] || '#6b7280'}15`,
-                        color: STATUS_COLORS[order.status] || '#6b7280',
-                      }}
-                    >
-                      {order.status}
-                    </span>
-                    <span className="dashboard-order__total">
-                      {formatCurrency(order.totalAmount || order.total || 0)}
-                    </span>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             )}
           </div>

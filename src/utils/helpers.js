@@ -79,3 +79,22 @@ export const getErrorMessage = (error, fallback = 'Something went wrong') => {
   }
   return fallback;
 };
+
+/**
+ * Format status string to title case for UI display.
+ * @param {string} status
+ * @returns {string} e.g. "preparing" -> "Preparing"
+ */
+export const formatStatus = (status) => {
+  if (!status) return '';
+  const statusMap = {
+    pending: 'Pending',
+    accepted: 'Accepted',
+    rejected: 'Rejected',
+    preparing: 'Preparing',
+    delivered: 'Delivered',
+    cancelled: 'Cancelled',
+  };
+  return statusMap[String(status).toLowerCase()] || String(status).charAt(0).toUpperCase() + String(status).slice(1);
+};
+

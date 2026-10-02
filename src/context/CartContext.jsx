@@ -14,6 +14,13 @@ import { getErrorMessage } from '../utils/helpers';
 
 export const CartContext = createContext(null);
 
+const extractCartItems = (data) => {
+  if (Array.isArray(data)) return data;
+  if (Array.isArray(data?.items)) return data.items;
+  if (Array.isArray(data?.cart?.items)) return data.cart.items;
+  return [];
+};
+
 export const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([]);
   const [cartLoading, setCartLoading] = useState(false);
@@ -26,7 +33,7 @@ export const CartProvider = ({ children }) => {
     setCartLoading(true);
     try {
       const data = await cartService.getCart();
-      setCartItems(data.items || data.cart?.items || data || []);
+      setCartItems(extractCartItems(data));
     } catch {
       // Silent fail — cart might be empty
       setCartItems([]);
@@ -43,7 +50,7 @@ export const CartProvider = ({ children }) => {
   const addToCart = async (foodId, restaurantId, quantity = 1) => {
     try {
       const data = await cartService.addToCart({ foodId, restaurantId, quantity });
-      setCartItems(data.items || data.cart?.items || data || []);
+      setCartItems(extractCartItems(data));
       toast.success('Added to cart');
       return true;
     } catch (error) {
@@ -53,23 +60,27 @@ export const CartProvider = ({ children }) => {
   };
 
   // ─── Update Quantity ───────────────────────────────────
-  const updateQuantity = async (itemId, quantity) => {
+  const updateQuantity = async (foodId, quantity) => {
     try {
-      const data = await cartService.updateCartItem(itemId, { quantity });
-      setCartItems(data.items || data.cart?.items || data || []);
+      const data = await cartService.updateCart({ foodId, quantity });
+      setCartItems(extractCartItems(data));
+      return true;
     } catch (error) {
       toast.error(getErrorMessage(error, 'Failed to update quantity'));
+      return false;
     }
   };
 
   // ─── Remove Item ───────────────────────────────────────
-  const removeItem = async (itemId) => {
+  const removeItem = async (foodId) => {
     try {
-      const data = await cartService.removeFromCart(itemId);
-      setCartItems(data.items || data.cart?.items || data || []);
+      const data = await cartService.removeFromCart(foodId);
+      setCartItems(extractCartItems(data));
       toast.success('Item removed from cart');
+      return true;
     } catch (error) {
       toast.error(getErrorMessage(error, 'Failed to remove item'));
+      return false;
     }
   };
 
@@ -108,3 +119,4 @@ export const CartProvider = ({ children }) => {
     </CartContext.Provider>
   );
 };
+

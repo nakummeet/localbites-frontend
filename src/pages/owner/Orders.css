@@ -97,32 +97,20 @@
   color: var(--color-primary);
 }
 
-.owner-order-card__status-control {
+.owner-order-card__actions {
   flex-shrink: 0;
 }
 
-.owner-order-card__select {
-  padding: 8px 14px;
+.owner-order-card__btn-group {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+.owner-order-card__completed-text {
   font-size: var(--font-size-sm);
-  font-family: var(--font-family);
-  border: 1.5px solid var(--color-border);
-  border-radius: var(--radius-md);
-  background-color: var(--color-white);
-  color: var(--color-text);
-  cursor: pointer;
-  transition: border-color var(--transition-fast);
-  appearance: auto;
-}
-
-.owner-order-card__select:focus {
-  border-color: var(--color-primary);
-  outline: none;
-  box-shadow: 0 0 0 3px var(--color-primary-light);
-}
-
-.owner-order-card__select:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-muted);
 }
 
 @media (max-width: 768px) {

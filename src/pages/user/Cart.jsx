@@ -73,10 +73,10 @@ const Cart = () => {
             {/* ─── Cart Items ────────────────── */}
             <div className="cart-page__items">
               {items.map((item) => {
-                const food = item.food || item;
-                const itemId = item._id || food._id;
+                const food = item.food && typeof item.food === 'object' ? item.food : item;
+                const foodId = food._id || item.food || item._id;
                 return (
-                  <div key={itemId} className="cart-item">
+                  <div key={foodId} className="cart-item">
                     <div className="cart-item__image-wrapper">
                       <img
                         src={food.image || `https://placehold.co/100x100/ff6b35/white?text=${encodeURIComponent(food.name || 'Food')}`}
@@ -92,7 +92,7 @@ const Cart = () => {
                       <div className="cart-item__quantity">
                         <button
                           className="cart-item__qty-btn"
-                          onClick={() => handleQuantityChange(itemId, (item.quantity || 1) - 1)}
+                          onClick={() => handleQuantityChange(foodId, (item.quantity || 1) - 1)}
                           disabled={item.quantity <= 1}
                         >
                           −
@@ -100,7 +100,7 @@ const Cart = () => {
                         <span className="cart-item__qty-value">{item.quantity || 1}</span>
                         <button
                           className="cart-item__qty-btn"
-                          onClick={() => handleQuantityChange(itemId, (item.quantity || 1) + 1)}
+                          onClick={() => handleQuantityChange(foodId, (item.quantity || 1) + 1)}
                         >
                           +
                         </button>
@@ -110,7 +110,7 @@ const Cart = () => {
                       </p>
                       <button
                         className="cart-item__remove"
-                        onClick={() => removeItem(itemId)}
+                        onClick={() => removeItem(foodId)}
                         aria-label="Remove item"
                       >
                         ✕

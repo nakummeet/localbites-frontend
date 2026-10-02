@@ -15,13 +15,12 @@ export const ROLES = {
 
 // Order status flow — mirrors backend status enum
 export const ORDER_STATUS = {
-  PENDING: 'Pending',
-  ACCEPTED: 'Accepted',
-  REJECTED: 'Rejected',
-  PREPARING: 'Preparing',
-  OUT_FOR_DELIVERY: 'Out for Delivery',
-  DELIVERED: 'Delivered',
-  CANCELLED: 'Cancelled',
+  PENDING: 'pending',
+  ACCEPTED: 'accepted',
+  REJECTED: 'rejected',
+  PREPARING: 'preparing',
+  DELIVERED: 'delivered',
+  CANCELLED: 'cancelled',
 };
 
 // Status color mapping for UI badges
@@ -30,7 +29,6 @@ export const STATUS_COLORS = {
   [ORDER_STATUS.ACCEPTED]: '#3b82f6',
   [ORDER_STATUS.REJECTED]: '#ef4444',
   [ORDER_STATUS.PREPARING]: '#8b5cf6',
-  [ORDER_STATUS.OUT_FOR_DELIVERY]: '#06b6d4',
   [ORDER_STATUS.DELIVERED]: '#10b981',
   [ORDER_STATUS.CANCELLED]: '#6b7280',
 };

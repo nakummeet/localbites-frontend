@@ -152,6 +152,54 @@
   color: var(--color-primary);
 }
 
+.food-card__qty-control {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--color-primary-light, #fff0ed);
+  border: 1.5px solid var(--color-primary);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  min-width: 96px;
+  height: 36px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.food-card__qty-btn {
+  background: transparent;
+  border: none;
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-primary);
+  cursor: pointer;
+  width: 32px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color var(--transition-fast), color var(--transition-fast);
+  user-select: none;
+}
+
+.food-card__qty-btn:hover:not(:disabled) {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+}
+
+.food-card__qty-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.food-card__qty-count {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-primary);
+  min-width: 24px;
+  text-align: center;
+  user-select: none;
+}
+
 /* ─── Unavailable Section ────────────────────────────── */
 .restaurant-details__unavailable {
   margin-top: var(--space-2xl);
